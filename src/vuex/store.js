@@ -13,6 +13,11 @@ export default new Vuex.Store({
       state.user = userData
       localStorage.setItem('user', JSON.stringify(userData)) // localStorage expect string, not object
       axios.defaults.headers.common['Authorization'] = `Bearer ${ userData.token}` // Token add to header
+    },
+    CLEAR_USER_DATA(){
+      localStorage.removeItem('user')
+      location.reload()
+    
     }
   },
   actions: {
@@ -32,6 +37,9 @@ export default new Vuex.Store({
         .catch(err => console.log(err))
 
     },
+    logout({ commit }){
+      commit('CLEAR_USER_DATA')
+    }
   },
   getters: {
     loggedIn(state){

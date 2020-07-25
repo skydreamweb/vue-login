@@ -34,6 +34,9 @@ export default {
          .then(() =>{
                 this.$router.push({ name: 'dashboard' })
             })
+            .catch(err => {
+              console.log(err.response);
+            })
     },
   },
 };
