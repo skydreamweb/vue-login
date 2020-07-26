@@ -2,8 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Dashboard from './views/Dashboard.vue'
-import Register from './views/RegisterUser.vue'
-import Login from './views/LoginUser.vue'
+import RegisterUser from './views/RegisterUser.vue'
+import LoginUser from './views/LoginUser.vue'
 
 Vue.use(Router)
 
@@ -25,12 +25,12 @@ const router = new Router({
     {
       path: '/register',
       name: 'register',
-      component: Register
+      component: RegisterUser
     },
     {
       path: '/login',
       name: 'login',
-      component: Login
+      component: LoginUser
     }
   ]
 })
@@ -38,14 +38,10 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   const loggedIn = localStorage.getItem('user')
 
-  if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (!loggedIn) {
-      next('/')
-      return
-    }
-    next()
+  if (to.matched.some(record => record.meta.requiresAuth) && !loggedIn) {
+    next('/')
+    return
   }
-
   next()
 })
 

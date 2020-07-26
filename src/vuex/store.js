@@ -16,12 +16,12 @@ export default new Vuex.Store({
     },
     CLEAR_USER_DATA(){
       localStorage.removeItem('user')
-      location.reload()
+      location.reload() // reload the current page, forces the refresh of the page
     
     }
   },
   actions: {
-    register({ commit }, payload){ // payload = data recived from RegisterUser.vue
+    register ({ commit }, payload){ // payload = data recived from RegisterUser.vue
       return axios.post('//localhost:3000/register', payload) // sending payload to server
       .then(response => {
        commit('SET_USER_DATA', response.data) // commit userData to mutation
@@ -32,18 +32,16 @@ export default new Vuex.Store({
     login({ commit }, payload) { // payload = data recived from RegisterUser.vue
       return axios.post('//localhost:3000/login', payload) // sending payload to server
         .then(response => {
-          commit('SET_USER_DATA', response.data) // commit userData to mutation
+          commit('SET_USER_DATA', response.data) // commit userData to mutationS
         })
-        .catch(err => console.log(err))
-
     },
-    logout({ commit }){
+    logout({ commit }) {
       commit('CLEAR_USER_DATA')
     }
   },
   getters: {
     loggedIn(state){
-      return !!state.user
+      return !!state.user // if user state is null it will return false and oposit
     }
   }
 })

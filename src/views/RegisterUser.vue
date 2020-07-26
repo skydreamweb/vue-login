@@ -43,7 +43,7 @@ export default {
                 email: this.email,
                 password: this.password
             })
-            .then(() =>{
+            .then( () => {
                 this.$router.push({ name: 'dashboard' })
             })
         }

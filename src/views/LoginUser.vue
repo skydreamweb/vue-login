@@ -1,15 +1,24 @@
 <template>
   <div>
     <form @submit.prevent="login">
-      <label for="email">Email:</label>
-      <input v-model="email" type="email" name="email" value />
+      <label for="email">
+        Email:
+      </label>
+      <input v-model="email" type="email" name="email" value>
 
-      <label for="password">Password:</label>
-      <input v-model="password" type="password" name="password" value />
+      <label for="password">
+        Password:
+      </label>
+      <input v-model="password" type="password" name="password" value>
 
-      <button type="submit" name="button">Login</button>
+      <button type="submit" name="button">
+        Login
+      </button>
+
+      <p>{{ error }}</p>
+
       <router-link to="/register">
-          Don't have an account? Register!
+        Don't have an account? Register.
       </router-link>
     </form>
   </div>
@@ -17,29 +26,30 @@
 
 <script>
 export default {
-  name: "Login",
-  data() {
+  data () {
     return {
-      email: "",
-      password: "",
-    };
+      email: '',
+      password: '',
+      error: null
+    }
   },
   methods: {
-    login() {
+    login () {
       this.$store
-        .dispatch("login", {
+        .dispatch('login', {
           email: this.email,
-          password: this.password,
+          password: this.password
         })
-         .then(() =>{
-                this.$router.push({ name: 'dashboard' })
-            })
-            .catch(err => {
-              console.log(err.response);
-            })
-    },
-  },
-};
+        .then(() => {
+          this.$router.push({ name: 'dashboard' })
+        })
+        .catch(err => {
+          this.error = err.response.data.error
+        })
+    }
+  }
+}
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+</style>
