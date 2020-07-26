@@ -26,7 +26,7 @@ export default new Vuex.Store({
       .then(response => {
        commit('SET_USER_DATA', response.data) // commit userData to mutation
       })
-      .catch(err => console.log(err))
+      
       
     },
     login({ commit }, payload) { // payload = data recived from RegisterUser.vue
